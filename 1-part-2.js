@@ -30,8 +30,6 @@ function getLineNumbers(line) {
     let last = '';
     let firstIndex = -1;
     let lastIndex = -1;
-    let match = '';
-
     let search = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     let index = -1;
     let largest = -1;
