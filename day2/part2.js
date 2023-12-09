@@ -28,10 +28,6 @@ lines.forEach((line) => {
 
 console.log(sum);
 
-//TODO: get minimum number of each color for each game
-//      get the power of each game
-//      sum the powers
-
 /**
  * calculate the power of the cubes
  * 
