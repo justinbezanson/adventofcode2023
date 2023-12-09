@@ -23,7 +23,7 @@ const CUBES = {
 }
 
 /** @type {string} */
-let input = require('./2-input.js');
+let input = require('./input.js');
 let lines = input.split('\n');
 /** @type {Array.<Game>} */
 let games = [];

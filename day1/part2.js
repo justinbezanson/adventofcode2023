@@ -3,7 +3,7 @@
 //https://adventofcode.com/2023/day/1#part2
 
 /** @type {string} */
-let input = require('./1-input.js');
+let input = require('./input.js');
 let lines = input.split('\n');
 let sum = 0;
 
