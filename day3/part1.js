@@ -8,9 +8,6 @@
 
 main();
 
-//TODO: check if number is adjact to a symbol
-//      when finished, sum the pool
-
 function main() {
     /** @type {string} */
     let input = require('./input.js');
