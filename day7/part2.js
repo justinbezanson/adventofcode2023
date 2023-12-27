@@ -1,12 +1,12 @@
 "use strict";
 
-//https://adventofcode.com/2023/day/7
+//https://adventofcode.com/2023/day/7#part2
 
 /**
  * representation of a hand with cards and a bid
  */
 class Hand {
-    static ORDER = '23456789TJQKA';
+    static ORDER = 'J23456789TQKA';
 
     /**
      * 
@@ -17,14 +17,77 @@ class Hand {
         this.bid = parseInt(line.split(' ')[1]);
         this.cardsArray = this.cards.split('');
         this.cardsArray.sort();
+        this.jokers = this.getNumberOfJokers();
+        this.rank = this.getRank();
+    }
 
-        this.rank = (this.isFiveOfAKind() && 7) ||
-            (this.isFourOfAKind() && 6) ||
-            (this.isFullHouse() && 5) ||
-            (this.isThreeOfAKind() && 4) ||
-            (this.isTwoPair() && 3) ||
-            (this.isOnePair() && 2) ||
-            1;
+    /**
+     * calculate the hand rank
+     * 
+     * @returns {number}
+     */
+    getRank() {
+        if(this.isFiveOfAKind()) {
+            return 7;
+        }
+
+        if(this.isFourOfAKind()) {
+            return this.jokers > 0 ? 7 : 6;
+        }
+
+        if(this.isFullHouse()) {
+            return this.jokers > 1 ? 7 : 5;
+        }
+
+        if(this.isThreeOfAKind()) {
+            return this.jokers > 0 ? 6 : 4;
+        }
+
+        if(this.isTwoPair()) {
+            if(this.jokers === 0) {
+                return 3;
+            }
+
+            //full house
+            if(this.jokers === 1) {
+                return 5;
+            }
+
+            //four of kind
+            return 6;
+        }
+
+        if(this.isOnePair()) {
+
+            //three of a kind
+            if(this.jokers > 0) {
+                return 4;
+            }
+
+            return 2;
+        }
+
+        if(this.jokers > 0) {
+            //one pair
+            return 2;
+        }
+
+        return 1;
+    }
+
+    /**
+     * get the number of jokers in the hand
+     */
+    getNumberOfJokers() {
+        let jokers = 0;
+
+        for(let i = 0; i < this.cardsArray.length; i++) {
+            if(this.cardsArray[i] === 'J') {
+                jokers++;
+            }
+        }
+
+        return jokers;
     }
 
     /**
@@ -167,4 +230,4 @@ hands.forEach((hand, index) => {
     winnings += (hand.bid * (index+1));
 });
 
-console.log(winnings); //250957639
+console.log(winnings); //251515496
